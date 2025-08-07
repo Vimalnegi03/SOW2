@@ -76,20 +76,21 @@ function Stories() {
         <h1 className='font-serif text-4xl text-center font-bold'>Our Partners</h1>
         <div>
        <div className="w-full overflow-x-hidden py-4 bg-white flex justify-center mt-4">
-  <div className="flex animate-marquee space-x-20 w-max">
+  <div className="w-full overflow-x-hidden py-4 bg-white flex justify-center">
+  <div className="flex animate-marquee space-x-10 sm:space-x-16 md:space-x-20 w-max">
     <img
       src="websites_lahi.png"
       alt="Lend A Hand India"
-      className="h-24 w-auto object-contain rounded shadow"
+      className="h-16 sm:h-20 md:h-24 w-auto object-contain rounded shadow"
     />
     <img
       src="https://upload.wikimedia.org/wikipedia/commons/d/d6/Logo_of_the_Central_Board_of_Secondary_Education.png?20250210073916"
       alt="CBSE"
-      className="h-24 w-auto object-contain rounded shadow"
+      className="h-16 sm:h-20 md:h-24 w-auto object-contain rounded shadow"
     />
-    {/* Repeat logos for seamless looping */}
- 
   </div>
+</div>
+
   {/* Animation style (can be in Tailwind config for production) */}
   {/* <style>{`
     @keyframes marquee {

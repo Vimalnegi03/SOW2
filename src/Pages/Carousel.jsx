@@ -14,7 +14,7 @@ function Carousel() {
     <>
     <div className="relative w-full mt-6 rounded-xl overflow-hidden border-yellow-600 border-b-2">
       {/* Responsive height container */}
-      <div className="h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] relative">
+      <div className="h-[300px] sm:h-[400px] md:h-[500px] lg:h-[800px] relative">
         {/* Slide 1 */}
         <div
           className={`absolute inset-0 flex items-center transition-opacity duration-1000 ease-in-out ${
