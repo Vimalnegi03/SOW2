@@ -63,12 +63,12 @@ const FullStories = () => {
   </h1>
   </div>
 </div>
-  <div className='border-1 border-b-yellow-400 mt-4 h-[80px] ml-6 border-white'>
+  <div className='border-1 border-b-yellow-400 mt-4 h-[80px] ml-6 border-white '>
     <span className='bg-amber-600 '>
   <h1 className='font-serif text-4xl justify-center  mt-10 pl-4 bg-yellow-400 w-[300px] text-white  '>Impacting Lives-:</h1>
   </span>
   </div>
-     <div className="max-w-7xl mx-auto px-4 sm:px-8 py-10">
+     <div className="max-w-7xl mx-auto px-4 sm:px-8 py-10 mt-4">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
         {cardsData.map(({ id, image, name, description }) => (
           <div key={id} className="bg-white rounded-xl shadow-lg overflow-hidden flex flex-col font-serif">
@@ -94,7 +94,7 @@ const FullStories = () => {
   <h1 className='font-serif text-4xl justify-center  mt-10 pl-4 bg-yellow-400 w-[330px] text-white  '>Featured Videos-:</h1>
   </span>
   </div>
-<div className="max-w-7xl mx-auto px-4 sm:px-8 py-6">
+<div className="max-w-7xl mx-auto px-4 sm:px-8 py-6 mt-4">
   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
     <div className="aspect-video">
       <iframe
