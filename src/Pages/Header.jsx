@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { FaFacebookF, FaLinkedinIn, FaInstagram, FaSearch } from 'react-icons/fa';
 import { AiFillYoutube } from 'react-icons/ai';
 import { BsTwitterX } from 'react-icons/bs';
-
+import {Link} from "react-router-dom"
 const navLinks = [
   {
     label: "ABOUT US",
@@ -124,13 +124,13 @@ function Header() {
           </div>
 
           {/* Logo */}
-          <a href="/" className="btn btn-ghost p-0 normal-case text-2xl flex items-center gap-2">
+          <Link to="/" className="btn btn-ghost p-0 normal-case text-2xl flex items-center gap-2">
             <img
               src="./Lahi_Logo.png"
               alt="Lahi Logo"
-              className="h-12 w-auto object-contain"
+              className="h-11 w-auto object-contain"
             />
-          </a>
+          </Link>
         </div>
 
         {/* Main nav (desktop only) */}

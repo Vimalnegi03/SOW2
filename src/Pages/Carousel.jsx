@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
-
+import About from "./About";
+import Stories from "./Stories";
+import OurPrograms from "./OurPrograms";
+import Stats from './Stats'
 function Carousel() {
   const [current, setCurrent] = useState(0);
 
@@ -91,6 +94,10 @@ function Carousel() {
         ))}
       </div>
     </div>
+    <About/>
+     <OurPrograms/>
+     <Stats/>
+     <Stories/>
     </>
   );
 }

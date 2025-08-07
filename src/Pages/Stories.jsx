@@ -1,5 +1,5 @@
 import React from 'react';
-
+import {Link} from "react-router-dom"
 const storiesData = [
   {
     id: 1,
@@ -39,7 +39,7 @@ function Stories() {
           type="button"
           className="mt-6 inline-block bg-orange-500 text-white font-semibold px-6 py-3 rounded-md shadow hover:bg-orange-600 transition"
         >
-          View all
+          <Link to="/stories">View all</Link>
         </button>
       </div>
 

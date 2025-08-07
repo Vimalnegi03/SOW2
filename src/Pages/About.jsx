@@ -19,7 +19,7 @@ const About = () => {
 ></iframe>
     </div>
     <p className="font-serif text-3xl  text-justify w-full lg:w-1/2 ml-4 ">
-      Lend A Hand India, a Pune based NGO working in the field of vocational education in secondary 
+     <span className='text-orange-400'> Lend A Hand India,</span> a Pune based NGO working in the field of vocational education in secondary 
       schools for last 10 years in 10 states across India in partnership with Governments of <span className='text-orange-400'>Maharashtra, 
       Gujarat, Andhra Pradesh, Telangana, NCT of Delhi, Odisha, Madhya Pradesh, Haryana, UT Of Diu and Daman. </span> 
       Our goal is to promote multi skill vocational education as part of secondary school curriculum across India.

@@ -8,17 +8,20 @@ import About from './Pages/About'
 import OurPrograms from './Pages/OurPrograms'
 import Stats from './Pages/Stats'
 import Stories from './Pages/Stories'
+import Footer from './Pages/Footer'
+import FullStories from './Pages/FullStories'
+import {Routes,Route} from 'react-router-dom'
 function App() {
   
 
   return (
     <>
      <Header/>
-     <Carousel/>
-     <About/>
-     <OurPrograms/>
-     <Stats/>
-     <Stories/>
+     <Routes>
+     <Route path="/" element={<Carousel/>}/>
+      <Route element={<FullStories/>} path="/stories"/>
+      </Routes>
+     <Footer/> 
     </>
   )
 }
