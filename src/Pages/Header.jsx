@@ -14,12 +14,32 @@ const navLinks = [
   {
     label: "PROGRAMS",
     submenu: [
-      { label: "Youth Empowerment", url: "#" },
-      { label: "Leadership Academy", url: "#" },
+      { label: "School Visits", url: "#" },
+      { label: "Government Visits", url: "#" },
+       { label: "Industry Visits", url: "#" },
+      { label: "Community Place Visits", url: "#" },
+       { label: "Events", url: "#" },
+      { label: "Training Of Trainers", url: "#" },
     ]
   },
-  { label: "GET INVOLVED", url: "#" },
-  { label: "RESOURCES", url: "#" },
+  { label: "GET INVOLVED",
+    submenu:[
+      { label: "Collaborate", url: "#" },
+      { label: "Job Opportunities", url: "#" },
+    ]
+   },
+  { label: "RESOURCES", 
+    submenu:[
+      {
+        label:"Stories of change",
+        url: "/stories"
+      },
+      {
+        label:"Visit Records",
+        url: "/visits"
+      },
+    ]
+  },
   { label: "CONTACT", url: "#" },
 ];
 
@@ -156,7 +176,7 @@ function Header() {
         </div>
 
         {/* Social icons + search on desktop */}
-        <div className="navbar-end gap-x-1.5 items-center relative hidden lg:flex">
+        <div className="navbar-end gap-x-6 items-center relative hidden lg:flex">
           {socialLinks.map(({ icon, url, label }) => (
             <a
               href={url}

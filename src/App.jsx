@@ -11,6 +11,7 @@ import Stories from './Pages/Stories'
 import Footer from './Pages/Footer'
 import FullStories from './Pages/FullStories'
 import {Routes,Route} from 'react-router-dom'
+import Visits from './Pages/Visits'
 function App() {
   
 
@@ -20,6 +21,7 @@ function App() {
      <Routes>
      <Route path="/" element={<Carousel/>}/>
       <Route element={<FullStories/>} path="/stories"/>
+     <Route element={<Visits/>} path="/visits"/>
       </Routes>
      <Footer/> 
     </>
