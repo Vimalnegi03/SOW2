@@ -32,7 +32,7 @@ const SkillsOnWheelsStoryPage = () => {
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <div>
               <h2 className="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight font-serif">Our Purpose: Bridging the Gap Between Curiosity and Opportunity.</h2>
-              <p className="mt-6 text-lg text-white leading-relaxed font-serif">
+              <p className="mt-6 text-lg text-black leading-relaxed font-serif">
                 In a rapidly evolving world, access to modern technology and hands-on learning is not a luxury—it's a necessity. Yet, many schools, especially in remote areas, lack the resources to provide this critical exposure.
               </p>
               <p className="mt-4 text-lg text-black leading-relaxed">
