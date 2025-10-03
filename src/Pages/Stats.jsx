@@ -54,7 +54,7 @@ function ReachStats() {
       </div>
     </section>
 <img
-  src="./Down_image.png"
+  src="Down_image.png"
   alt=""
   className="w-full h-auto"
   loading="lazy"
