@@ -3,7 +3,7 @@ import React from 'react';
 function ReachStats() {
   const stats = [
     {
-      number: '25',
+      number: '10+',
       label: 'States & Union Territories',
       description: 'Activities in',
     },
@@ -15,10 +15,10 @@ function ReachStats() {
     {
       number: '3000',
       label: 'Girls and women reached',
-      description: "Through mothers' groups and other programs",
+      description: "Through school visits and community programs",
     },
     {
-      number: '118K',
+      number: '18K+',
       label: 'Youth reached',
       description: 'Through vocational/non-vocational courses',
     },
