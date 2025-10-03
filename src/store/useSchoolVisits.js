@@ -7,7 +7,7 @@ const useVisitStore = create((set) => ({
   fetchVisits: async () => {
     set({ loading: true });
     try {
-      const res = await axios.get("http://localhost:5000/api/visits/last20");
+      const res = await axios.get("https://sow2-backend-deploy.onrender.com/api/visits/last20");
       set({ visits: res.data, loading: false });
     } catch (err) {
       console.error("Error fetching visits:", err);
