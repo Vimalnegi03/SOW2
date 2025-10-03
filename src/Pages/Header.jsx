@@ -7,27 +7,27 @@ const navLinks = [
   {
     label: "ABOUT US",
     submenu: [
-      { label: "Our Story", url: "#" },
-      { label: "Team", url: "#" },
+      { label: "Our Story", url: "/our-story" },
+      // { label: "Team", url: "#" },
     ]
   },
   {
     label: "PROGRAMS",
     submenu: [
-      { label: "School Visits", url: "#" },
-      { label: "Government Visits", url: "#" },
-       { label: "Industry Visits", url: "#" },
-      { label: "Community Place Visits", url: "#" },
-       { label: "Events", url: "#" },
-      { label: "Training Of Trainers", url: "#" },
+      { label: "School Visits", url: "/skills-on-wheels-story" },
+      // { label: "Government Visits", url: "#" },
+      //  { label: "Industry Visits", url: "#" },
+      // { label: "Community Place Visits", url: "#" },
+      //  { label: "Events", url: "#" },
+      // { label: "Training Of Trainers", url: "#" },
     ]
   },
-  { label: "GET INVOLVED",
-    submenu:[
-      { label: "Collaborate", url: "#" },
-      { label: "Job Opportunities", url: "#" },
-    ]
-   },
+  // { label: "GET INVOLVED",
+  //   submenu:[
+  //     { label: "Collaborate", url: "#" },
+  //     { label: "Job Opportunities", url: "#" },
+  //   ]
+  //  },
   { label: "RESOURCES", 
     submenu:[
       {
@@ -40,15 +40,15 @@ const navLinks = [
       },
     ]
   },
-  { label: "CONTACT", url: "#" },
+  // { label: "CONTACT", url: "#" },
 ];
 
 const socialLinks = [
-  { icon: <FaFacebookF size={21} />, url: "https://facebook.com", label: "Facebook" ,color:"primary" },
-  { icon: <FaLinkedinIn size={21} />, url: "https://linkedin.com", label: "LinkedIn",color:"primary" },
-  { icon: <AiFillYoutube size={24} />, url: "https://youtube.com", label: "YouTube" ,color:"red"},
-  { icon: <FaInstagram size={21} />, url: "https://instagram.com", label: "Instagram" ,color:"pink"},
-  { icon: <BsTwitterX size={21} />, url: "https://x.com", label: "Twitter(X)" }
+  { icon: <FaFacebookF size={21} />, url: "https://www.facebook.com/lendahandindia/about/", label: "Facebook" ,color:"primary" },
+  { icon: <FaLinkedinIn size={21} />, url: "https://www.linkedin.com/company/lendahandindia/", label: "LinkedIn",color:"primary" },
+  { icon: <AiFillYoutube size={24} />, url: "https://www.youtube.com/results?search_query=skills+on+wheels", label: "YouTube" ,color:"red"},
+  { icon: <FaInstagram size={21} />, url: "https://www.instagram.com/lendahandindia/", label: "Instagram" ,color:"pink"},
+  { icon: <BsTwitterX size={21} />, url: "https://x.com/lendahandindia", label: "Twitter(X)" }
 ];
 
 function Header() {
@@ -99,7 +99,7 @@ function Header() {
                     </details>
                   </li>
                 ) : (
-                  <li key={idx}><a href={item.url}>{item.label}</a></li>
+                  <li key={idx}><Link to={item.url}>{item.label}</Link></li>
                 )
               )}
               {/* Social Icons inside hamburger */}

@@ -1,177 +1,177 @@
-import React from 'react'
+// src/components/FullStories.js
+import React, { useState, useEffect, useMemo } from 'react';
+import { Link } from "react-router-dom";
+import Pagination from './Pagination';
+import useVisitStore from '../store/useSchoolVisits';
+import AnimatedButterfly from './AnimatedButterfly'; // <-- 1. IMPORT THE BUTTERFLY
+
+// SVG for the Flower
+
 
 const FullStories = () => {
-    const cardsData = [
-  {
-    id: 1,
-    image: "https://images.pexels.com/photos/3184287/pexels-photo-3184287.jpeg",
-    name: "Student Name",
-    description:
-      "Empowering rural youth with industry-relevant skills and hands-on training.",
-  },
-  {
-    id: 2,
-    image: "https://images.pexels.com/photos/3184639/pexels-photo-3184639.jpeg",
-    name: "Student Name",
-    description:
-      "Building leadership for impactful local change through youth participation.",
-  },
-  {
-    id: 3,
-    image: "https://images.pexels.com/photos/1181690/pexels-photo-1181690.jpeg",
-    name: "Student Name",
-    description:
-      "Integrating vocational training into education for sustainable futures.",
-  },
-  {
-    id: 4,
-    image: "https://images.pexels.com/photos/414518/pexels-photo-414518.jpeg",
-    name: "Student Name",
-    description:
-      "Supporting women through skill development and community initiatives.",
-  },
-  {
-    id: 5,
-    image: "https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg",
-    name: "Student Name",
-    description:
-      "Engaging youth through programs that encourage growth and learning.",
-  },
-  {
-    id: 6,
-    image: "https://images.pexels.com/photos/1595391/pexels-photo-1595391.jpeg",
-    name: "Student Name",
-    description:
-      "Improving local infrastructure to support education and training programs.",
-  },
-];
+    const { visits, loading, fetchVisits } = useVisitStore();
+    const [starStudentPage, setStarStudentPage] = useState(1);
+    const [featuredVideoPage, setFeaturedVideoPage] = useState(1);
 
-  return (
-    <>
-    <div
-  className="relative w-full h-[30vh] flex items-center  mt-18"
-  style={{
-    backgroundImage: 'url("https://images.pexels.com/photos/207983/pexels-photo-207983.jpeg")',
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    backgroundRepeat: "no-repeat",
-  }}
->
-    <div className=' border-orange-500 ml-4 pr-2 bg-yellow-400 h-[60px] mt-40 rounded-2xl hover:bg-amber-50 hover:text-yellow-400'>
-  <h1 className="font-serif text-2xl  drop-shadow font-semibold ml-4 text-white text-center mt-4 hover:text-yellow-400">
-    Stories of Change -:
-  </h1>
-  </div>
-</div>
-  <div className='border-1 border-b-yellow-400 mt-4 h-[80px] ml-6 border-white '>
-    <span className='bg-amber-600 '>
-  <h1 className='font-serif text-4xl justify-center  mt-10 pl-4 bg-yellow-400 w-[300px] text-white  '>Impacting Lives-:</h1>
-  </span>
-  </div>
-     <div className="max-w-7xl mx-auto px-4 sm:px-8 py-10 mt-4">
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-        {cardsData.map(({ id, image, name, description }) => (
-          <div key={id} className="bg-white rounded-xl shadow-lg overflow-hidden flex flex-col font-serif">
-            <img
-              src={image}
-              alt={name}
-              className="h-48 w-full object-cover"
-              loading="lazy"
-            />
-            <div className="p-6 flex flex-col flex-grow">
-              <h2 className="text-xl font-semibold mb-2 font-serif text-orange-600">{name}</h2>
-              <p className="text-gray-700 flex-grow">{description}</p>
-              <button className="mt-4 self-start btn btn-sm btn-warning font-semibold rounded-full">
-                Read More
-              </button>
+    const recordsPerPage = 4;
+
+    useEffect(() => {
+        fetchVisits();
+    }, [fetchVisits]);
+
+    const starStudents = useMemo(() => {
+        return visits
+            .filter(visit => visit.StarOfTheDayStudentName && visit.StarOfTheDayPhotoUrl && visit.StarOfTheDayExperience)
+            .map((visit, index) => ({
+                id: `${visit.SchoolUdise}-${visit.StarOfTheDayStudentName}-${index}`,
+                name: visit.StarOfTheDayStudentName,
+                image: visit.StarOfTheDayPhotoUrl,
+                experience: visit.StarOfTheDayExperience,
+            }));
+    }, [visits]);
+
+    const featuredVideos = useMemo(() => {
+        return visits
+            .filter(visit => visit.VideoUrl)
+            .map(visit => {
+                let embedUrl = visit.VideoUrl;
+                if (embedUrl.includes("watch?v=")) {
+                    embedUrl = embedUrl.replace("watch?v=", "embed/");
+                } else if (embedUrl.includes("youtu.be/")) {
+                    embedUrl = embedUrl.replace("youtu.be/", "youtube.com/embed/");
+                }
+                embedUrl += (embedUrl.includes("?") ? "&" : "?") + "modestbranding=1&rel=0";
+                return {
+                    id: visit.SchoolUdise,
+                    title: `Highlights from ${visit.SchoolName}`,
+                    embedUrl: embedUrl,
+                };
+            });
+    }, [visits]);
+
+    const studentStartIndex = (starStudentPage - 1) * recordsPerPage;
+    const currentStarStudents = starStudents.slice(studentStartIndex, studentStartIndex + recordsPerPage);
+    const studentTotalPages = Math.ceil(starStudents.length / recordsPerPage);
+
+    const videoStartIndex = (featuredVideoPage - 1) * recordsPerPage;
+    const currentFeaturedVideos = featuredVideos.slice(videoStartIndex, videoStartIndex + recordsPerPage);
+    const videoTotalPages = Math.ceil(featuredVideos.length / recordsPerPage);
+
+    if (loading) {
+        return (
+            <div className="flex justify-center items-center h-screen bg-slate-50">
+                <div className="text-center">
+                    <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-orange-500 mx-auto"></div>
+                    <p className="text-xl font-semibold text-gray-700 mt-4">Loading Stories...</p>
+                </div>
             </div>
-          </div>
-        ))}
-      </div>
-    </div>
-     <div className='border-1 border-b-yellow-400 mt-4 h-[80px] ml-6 border-white'>
-    <span className='bg-amber-600 '>
-  <h1 className='font-serif text-4xl justify-center  mt-10 pl-4 bg-yellow-400 w-[330px] text-white  '>Featured Videos-:</h1>
-  </span>
-  </div>
-<div className="max-w-7xl mx-auto px-4 sm:px-8 py-6 mt-4">
-  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-    <div className="aspect-video">
-      <iframe
-        src="https://www.youtube.com/embed/oBIUeDP9Oo0?si=ha7eprSdSavRvkZF"
-        title="YouTube video player 1"
-        frameBorder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowFullScreen
-        className="w-full h-full"
-        referrerPolicy="strict-origin-when-cross-origin"
-      ></iframe>
-    </div>
+        );
+    }
 
-    <div className="aspect-video">
-      <iframe
-        src="https://www.youtube.com/embed/n9XQQ4ZpAqA?si=0nhfk6qwte0dcZ08"
-        title="YouTube video player 2"
-        frameBorder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowFullScreen
-        className="w-full h-full"
-        referrerPolicy="strict-origin-when-cross-origin"
-      ></iframe>
-    </div>
+    return (
+      <>
+        <div className="bg-slate-50">
+            <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
+                
+                {/* --- HEADER --- */}
+                <div className="text-center max-w-3xl mx-auto mb-20">
+                    <h1 className="text-4xl sm:text-5xl font-extrabold text-black mb-4 tracking-tight font-serif">
+                        Stories of Change
+                    </h1>
+                    <div className="w-24 h-1 bg-orange-500 mx-auto mb-6"></div>
+                    <p className="text-slate-600 text-lg sm:text-xl leading-relaxed">
+                        Explore the journeys of our bright students and witness the transformative power of our mission through these featured highlights.
+                    </p>
+                </div>
 
-    <div className="aspect-video">
-      <iframe
-        src="https://www.youtube.com/embed/LlHd91enrto?si=dZUNlGW7iDQv48J5"
-        title="YouTube video player 3"
-        frameBorder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowFullScreen
-        className="w-full h-full"
-        referrerPolicy="strict-origin-when-cross-origin"
-      ></iframe>
-    </div>
+                {/* --- OUR STAR STUDENTS SECTION --- */}
+                {starStudents.length > 0 && (
+                    <div className="mb-20">
+                        <h2 className="text-3xl sm:text-4xl font-bold text-black mb-12 text-center font-serif">Our Star Students</h2>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                            {currentStarStudents.map((student) => (
+                                <div key={student.id} className="bg-white rounded-2xl shadow-lg overflow-hidden transform transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 flex flex-col">
+                                   <img 
+  src={student.image || "/placeholder.png"} 
+  alt={student.name || "Unnamed Student"} 
+  className="w-full h-56 object-cover" 
+  loading="lazy"
+  onError={(e) => e.target.src="/placeholder.png"} 
+/>
+                                    <div className="p-6 flex flex-col flex-grow">
+                                        <h3 className="text-xl font-bold text-black">{student.name}</h3>
+                                        <blockquote className="mt-4 pt-4 border-t border-slate-200 flex-grow">
+                                            <p className="text-slate-600 italic text-sm">"{student.experience}"</p>
+                                        </blockquote>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                        <Pagination currentPage={starStudentPage} totalPages={studentTotalPages} onPageChange={setStarStudentPage} />
+                    </div>
+                )}
 
-    <div className="aspect-video">
-      <iframe
-        src="https://www.youtube.com/embed/bIym870rG1E?si=kDuHEkuyXrwjfDYg"
-        title="YouTube video player 4"
-        frameBorder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowFullScreen
-        className="w-full h-full"
-        referrerPolicy="strict-origin-when-cross-origin"
-      ></iframe>
-    </div>
+                {/* --- FEATURED VIDEOS SECTION --- */}
+                {featuredVideos.length > 0 && (
+                    <div>
+                        <h2 className="text-3xl sm:text-4xl font-bold text-black mb-12 text-center">Featured Videos</h2>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                            {currentFeaturedVideos.map((video) => (
+                                <div key={video.id} className="bg-white rounded-2xl shadow-lg overflow-hidden transform transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
+                                    <div className="aspect-video">
+                                        <iframe
+                                            className="w-full h-full"
+                                            src={video.embedUrl}
+                                            title={video.title}
+                                            frameBorder="0"
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                            allowFullScreen
+                                        ></iframe>
+                                    </div>
+                                    <div className="p-6">
+                                        <h3 className="text-lg font-semibold text-slate-900">{video.title}</h3>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                        <Pagination currentPage={featuredVideoPage} totalPages={videoTotalPages} onPageChange={setFeaturedVideoPage} />
+                    </div>
+                )}
+            </section>
 
-    <div className="aspect-video">
-      <iframe
-        src="https://www.youtube.com/embed/OPL6w_kU5fY?si=XdiyYPlWSoztaY29"
-        title="YouTube video player 5"
-        frameBorder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowFullScreen
-        className="w-full h-full"
-        referrerPolicy="strict-origin-when-cross-origin"
-      ></iframe>
-    </div>
+            {/* --- PARTNERS SECTION --- */}
+            <div className="py-10 bg-gray-50">
+  <h1 className="font-serif text-3xl text-center font-bold text-black">
+    Our Partners
+  </h1>
 
-    <div className="aspect-video">
-      <iframe
-        src="https://www.youtube.com/embed/PAX0xvvcEIw?si=tVwbTaIqKubm13mO"
-        title="YouTube video player 6"
-        frameBorder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowFullScreen
-        className="w-full h-full"
-        referrerPolicy="strict-origin-when-cross-origin"
-      ></iframe>
+  {/* Container */}
+  <div className="w-full py-4 mt-4 flex justify-center">
+    <div
+      className="
+        flex flex-wrap justify-center items-center gap-10
+        md:gap-20 md:flex-nowrap md:animate-marquee w-full md:w-max
+      "
+    >
+      {/* Logo 1 */}
+      <img
+        src="websites_lahi.png"
+        alt="Lend A Hand India"
+        className="h-16 sm:h-20 md:h-24 w-auto object-contain"
+      />
+
+      {/* Logo 2 */}
+      <img
+        src="CBSE.png"
+        alt="CBSE"
+        className="h-16 sm:h-20 md:h-24 w-auto object-contain"
+      />
     </div>
   </div>
 </div>
+        </div>
+        </>
+    );
+};
 
-    </>
-  )
-}
-
-export default FullStories
+export default FullStories;

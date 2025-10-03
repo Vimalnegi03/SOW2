@@ -1,6 +1,9 @@
 import React from "react";
 // If you have a logo, import and use <img src={logo} .../> instead of text
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFacebookF, faInstagram, faXTwitter } from '@fortawesome/free-brands-svg-icons';
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { Link } from "react-router-dom";
 function Footer() {
   return (
     <footer className="bg-base-200 text-base-content border-t border-base-300 mt-12">
@@ -15,31 +18,31 @@ function Footer() {
 
           {/* Navigation */}
           <nav className="flex-1 flex flex-col md:flex-row md:justify-center gap-4 md:gap-8 text-base">
-            <a href="#about" className="hover:text-orange-500 transition">About</a>
-            <a href="#programs" className="hover:text-orange-500 transition">Programs</a>
-            <a href="#stories" className="hover:text-orange-500 transition">Stories</a>
-            <a href="#contact" className="hover:text-orange-500 transition">Contact</a>
+            <Link to="/our-story" className="hover:text-orange-500 transition">About</Link>
+            <Link to="/skills-on-wheels-story" className="hover:text-orange-500 transition">Programs</Link>
+            <Link to="/stories" className="hover:text-orange-500 transition">Stories</Link>
+
           </nav>
 
           {/* Social & Contact */}
           <div className="flex-1 flex flex-col md:items-end gap-4">
             <div className="flex space-x-4">
               {/* DaisyUI social buttons */}
-              <a href="https://facebook.com" className="btn btn-circle btn-sm btn-ghost" aria-label="Facebook">
-                <i className="fa-brands fa-facebook-f"></i>
+              <a href="https://www.facebook.com/lendahandindia/about/" className="btn btn-circle btn-sm  text-black" aria-label="Facebook" target="_blank">
+                <FontAwesomeIcon icon={faFacebookF} />
               </a>
-              <a href="https://instagram.com" className="btn btn-circle btn-sm btn-ghost" aria-label="Instagram">
-                <i className="fa-brands fa-instagram"></i>
+              <a href="https://www.instagram.com/lendahandindia/" className="btn btn-circle btn-sm  text-black" aria-label="Instagram" target="_blank">
+                <FontAwesomeIcon icon={faInstagram} />
               </a>
-              <a href="https://twitter.com" className="btn btn-circle btn-sm btn-ghost" aria-label="Twitter">
-                <i className="fa-brands fa-x-twitter"></i>
+              <a href="https://x.com/lendahandindia" className="btn btn-circle btn-sm  text-black" aria-label="Twitter" target="_blank">
+                <FontAwesomeIcon icon={faXTwitter} />
               </a>
-              <a href="mailto:info@skillsonwheels.org" className="btn btn-circle btn-sm btn-ghost" aria-label="Mail">
-                <i className="fa-solid fa-envelope"></i>
+              <a href="mailto:lahi@lend-a-hand-india.org" className="btn btn-circle btn-sm text-black" aria-label="Mail" target="_blank">
+                <FontAwesomeIcon icon={faEnvelope} />
               </a>
             </div>
             <address className="not-italic text-sm text-gray-500">
-              Mumbai, India <br /> info@skillsonwheels.org
+              Mumbai, India <br />lahi@lend-a-hand-india.org
             </address>
           </div>
         </div>
