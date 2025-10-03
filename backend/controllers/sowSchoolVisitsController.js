@@ -17,7 +17,7 @@ export const getLastTwentyVisits = async (req, res) => {
         StarOfTheDayPhotoUrl
       FROM SowSchoolVisits
       ORDER BY DateOfVisit DESC
-      LIMIT 10`
+      LIMIT 5`
     );
 
     res.json(rows);
